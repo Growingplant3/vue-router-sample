@@ -37,4 +37,15 @@ export default new Router({
       redirect: '/' // オブジェクトも使用可能
     }
   ],
+  scrollBehavior(to, from, savedPosition) {
+    console.log(savedPosition);
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return {
+      selector: '#next-user',
+      offset: {x: 0, y: 100}
+    };
+    // return {x: 0, y: 0};
+  }
 });
