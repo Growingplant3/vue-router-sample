@@ -12,10 +12,15 @@ Vue.use(Router);
 export default new Router({
   mode: 'history',
   routes: [
-    { path: '/', components:
+    { 
+      path: '/', components:
       {
         default: Home,
         header: HeaderHome
+      },
+      beforeEnter(to, from, next) {
+        next();
+        next(false); // 表示されなくなる
       }
     },
     {
