@@ -38,14 +38,27 @@ export default new Router({
     }
   ],
   scrollBehavior(to, from, savedPosition) {
-    console.log(savedPosition);
-    if (savedPosition) {
-      return savedPosition;
-    }
-    return {
-      selector: '#next-user',
-      offset: {x: 0, y: 100}
-    };
-    // return {x: 0, y: 0};
+    console.log(savedPosition); // ブラウザ戻るボタンを押した位置
+    return new Promise(resolve => {
+      this.app.$root.$on('triggerScroll', () => {
+        let position = {x: 0, y: 0}
+        if (savedPosition) {
+          position = savedPosition;
+        }
+        if (to.hash) {
+          return {
+            selector: to.hash,
+            offset: {x: 0, y: 100}
+          };
+        }
+        resolve(position);
+      });
+    });
+
+    // if (savedPosition) {
+    //   return savedPosition;
+    // }
+
+    // return {x: 0, y: 100};
   }
 });
