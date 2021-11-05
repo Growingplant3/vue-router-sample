@@ -13,24 +13,34 @@
       exact
       class='link'
     >Users</router-link>
-    <button @click='increment'>+1</button>
-    <button @click='decrement'>-1</button>
+    <button @click='increment(2)'>+1</button>
+    <button @click='decrement(2)'>-1</button>
   </nav>
 </template>
 
 <script>
+// import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
+
 export default {
   methods: {
-    increment() {
-      this.$store.commit('increment', 2); // ミューテーションをcommitしてる
-    },
-    decrement() {
-      this.$store.commit('decrement', 2);
-    } 
+    ...mapActions('count', ['increment', 'decrement']),
+    // ...mapMutations(['increment', 'decrement']) ...はスプレッド演算子
+    // increment() {
+    //   this.$store.commit('increment', 2); // ミューテーションをcommitしてる
+    // },
+    // decrement() {
+    //   this.$store.commit('decrement', 2);
+    // } 
+    // increment() {
+    //   this.$store.dispatch('increment', 2);
+    // },
+    // decrement() {
+    //   this.$store.dispatch('decrement', 2);
+    // },
   }
 };
 </script>
-
 
 <style scoped>
   .link {

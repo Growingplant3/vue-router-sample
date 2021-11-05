@@ -12,6 +12,13 @@
     <p>{{ doubleCount }}</p>
     <p>{{ tripleCount }}</p>
     <!-- <p>{{ myComponentDoubleCount }}</p> -->
+          <!-- :value='message'
+      @input='updateMessage' -->
+    <input
+      type='text'
+      v-model='message'
+    >
+    <p>{{ message }}</p>
   </div>
 </template>
 
@@ -36,9 +43,23 @@ export default {
   //   myComponentDoubleCount: 'doubleCount' // キー名を変更できる
   // }),
   computed: {
-    ...mapGetters(['doubleCount', 'tripleCount']) // スプレッド演算子
+    ...mapGetters('count', ['doubleCount', 'tripleCount']), // スプレッド演算子
+    // message() {
+    //   return this.$store.getters.message;
+    // }
+    message: {
+      get() {
+        return this.$store.getters.message;
+      },
+      set(value) {
+        this.$store.dispatch('updateMessage', value);
+      },
+    }
   },
   methods: {
+    // updateMessage(e) {
+    //   this.$store.dispatch('updateMessage', e.target.value);
+    // },
     toUsers() {
       this.$router.push('users');
       // 別の書き方
