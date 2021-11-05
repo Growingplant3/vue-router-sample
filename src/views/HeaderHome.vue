@@ -22,7 +22,7 @@
 export default {
   methods: {
     increment() {
-      this.$store.commit('increment', 2);
+      this.$store.commit('increment', 2); // ミューテーションをcommitしてる
     },
     decrement() {
       this.$store.commit('decrement', 2);
